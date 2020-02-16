@@ -12,9 +12,11 @@ export class HomePage implements OnInit {
 
     results: Observable<any>;
 
-    constructor(private homeService: HomeService) {  }
+    constructor(private homeService: HomeService) {}
 
     ngOnInit() {
         this.results = this.homeService.searchFilms();
+
+        console.log(this.results);
     }
 }
