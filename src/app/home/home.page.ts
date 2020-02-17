@@ -1,6 +1,6 @@
-import {HomeService} from '../services/home.service';
 import {Component, OnInit} from '@angular/core';
 import {Observable} from 'rxjs';
+import {HttpClient} from '@angular/common/http';
 
 @Component({
     selector: 'app-home',
@@ -10,13 +10,19 @@ import {Observable} from 'rxjs';
 
 export class HomePage implements OnInit {
 
+    url = 'http://antonintouron.fr/private/theo/public/api/';
     results: Observable<any>;
 
-    constructor(private homeService: HomeService) {}
+    constructor(private httpClient: HttpClient) {}
 
     ngOnInit() {
-        this.results = this.homeService.searchFilms();
+        // this.results = this.homeService.searchFilms();
 
-        console.log(this.results);
+        this.url = this.url + 'film';
+        this.results = this.httpClient.get(this.url);
+        this.results
+            .subscribe(data => {
+                // console.log(data);
+            });
     }
 }
